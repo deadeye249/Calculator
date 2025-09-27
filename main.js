@@ -3,6 +3,7 @@ let operator_list = "+-x%=".split("");
 let numbers_section = document.querySelector(".numbers-section");
 let operators_section = document.querySelector(".operators-section");
 let screen_section = document.querySelector(".calculator-screen");
+let bottom_section = document.querySelector(".bottom");
 const stack = [];
 
 function add(first, second)
@@ -54,7 +55,7 @@ function updateStack(character)
 {
     if(character == "=")
     {
-        let result = operate(stack.pop(), stack.pop(), stack.pop())
+        let result = operate(stack.pop(), stack.pop(), stack.pop());
         stack.push(result);
         return;
     }
@@ -76,6 +77,7 @@ function addButton(parent_node, character)
         let clicked_character = event.target.textContent;
         updateStack(clicked_character);
         updateDisplay();
+        bottom_section.textContent+=" "+ clicked_character;
     });
     parent_node.append(new_node);
 }
