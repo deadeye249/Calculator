@@ -50,6 +50,7 @@ body{
     border: 3px;
     border-color: black;
     border-style: solid;
+    background-color:wheat;
     height: 100px;
     width: 90%;
     margin: 25px 0 25px 0;
@@ -70,6 +71,7 @@ body{
     width: 90%;
     margin: 0 0 25px 0;
     box-sizing: border-box;
+    background-color: lightgrey;
 }
 
 .numbers-section{
@@ -98,5 +100,6 @@ body{
     align-items: center;
     margin: 3px;
     font-size: 30px;
+    background-color: white;
 
 }
