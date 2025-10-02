@@ -1,7 +1,8 @@
-const calculator_body = document.querySelector(".calculator-body");
-const screen_section = document.querySelector(".calculator-screen");
-const bottom_section = document.querySelector(".bottom");
-const buttons = document.querySelectorAll(".button");
+let numbers_list = "1234567890.".split("");
+let operator_list = "+-x%=".split("");
+let numbers_section = document.querySelector(".numbers-section");
+let operators_section = document.querySelector(".operators-section");
+let screen_section = document.querySelector(".calculator-screen");
 const stack = [];
 
 function add(first, second)
@@ -78,7 +79,6 @@ function updateButton(node, character)
         const clicked_character = event.target.textContent;
         updateStack(clicked_character);
         updateDisplay();
-        bottom_section.textContent+=" "+ clicked_character;
     });
 }
 
