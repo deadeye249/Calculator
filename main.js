@@ -1,9 +1,7 @@
-let numbers_list = "1234567890.".split("");
-let operator_list = "+-x%=".split("");
-let numbers_section = document.querySelector(".numbers-section");
-let operators_section = document.querySelector(".operators-section");
-let screen_section = document.querySelector(".calculator-screen");
-let bottom_section = document.querySelector(".bottom");
+const calculator_body = document.querySelector(".calculator-body");
+const screen_section = document.querySelector(".calculator-screen");
+const bottom_section = document.querySelector(".bottom");
+const buttons = document.querySelectorAll(".button");
 const stack = [];
 
 function add(first, second)
@@ -22,7 +20,7 @@ function divide(first,second)
 {
     if(second == 0)
     {
-        return "Error";
+        return "Error: Divided by 0";
     }
     parseFloat(first)/parseFloat(second);
 }
@@ -40,9 +38,13 @@ function operate(second, operator, first)
     {
         return multiply(first,second);
     }
-    else
+    else if (operator == '%')
     {
         return divide(first,second);
+    }
+    else
+    {
+        return "Error: Invalid Operator";
     }
 }
 
@@ -55,16 +57,15 @@ function updateStack(character)
 {
     if(character == "=")
     {
-        let result = operate(stack.pop(), stack.pop(), stack.pop());
+        const result = operate(stack.pop(), stack.pop(), stack.pop());
         stack.push(result);
         return;
     }
     stack.push(character);
 }
 
-function addButton(parent_node, character)
+function updateButton(node, character)
 {
-    let new_node = document.createElement("div");
     new_node.textContent = character;
     new_node.className = "button";
     new_node.addEventListener("mouseenter",()=>{
@@ -74,18 +75,11 @@ function addButton(parent_node, character)
         new_node.style.backgroundColor = "white";
     });
     new_node.addEventListener("click",(event)=>{
-        let clicked_character = event.target.textContent;
+        const clicked_character = event.target.textContent;
         updateStack(clicked_character);
         updateDisplay();
         bottom_section.textContent+=" "+ clicked_character;
     });
-    parent_node.append(new_node);
 }
 
-numbers_list.forEach((value)=>{
-    addButton(numbers_section,value);
-})
 
-operator_list.forEach((value)=>{
-    addButton(operators_section,value);
-})
