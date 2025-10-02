@@ -1,5 +1,5 @@
 let numbers_list = "1234567890.".split("");
-let operator_list = "+-x%=".split("");
+let operator_list = "+-x/=".split("");
 let numbers_section = document.querySelector(".numbers-section");
 let operators_section = document.querySelector(".operators-section");
 let screen_section = document.querySelector(".calculator-screen");
@@ -67,11 +67,22 @@ function addButton(parent_node, character)
     let new_node = document.createElement("div");
     new_node.textContent = character;
     new_node.className = "button";
-    new_node.addEventListener("mouseenter",()=>{
-        new_node.style.backgroundColor = "yellow";
+    if(parent_node == operators_section)
+    {
+        new_node.className += " operator";
+    }
+    new_node.addEventListener("mouseenter",(event)=>{
+        event.target.style.backgroundColor = "yellow";
     });
-    new_node.addEventListener("mouseleave",()=>{
-        new_node.style.backgroundColor = "white";
+    new_node.addEventListener("mouseleave",(event)=>{
+        if(event.target.className == "button operator")
+        {
+            event.target.style.backgroundColor = "lightblue";
+        }
+        else
+        {
+            event.target.style.backgroundColor = "white";
+        }
     });
     new_node.addEventListener("click",(event)=>{
         let clicked_character = event.target.textContent;
