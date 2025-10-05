@@ -32,15 +32,15 @@ function operate(second, operator, first)
     if (operator == '+'){
         return add(first, second);
     }
-    else if (operator == '-')
+    if (operator == '-')
     {
         return subtract(first,second);
     }
-    else if (operator == 'x')
+    if (operator == 'x')
     {
         return multiply(first,second);
     }
-    else
+    if (operator == '/')
     {
         return divide(first,second);
     }
@@ -53,19 +53,26 @@ function updateDisplay()
 
 function updateStack(character)
 {
-    if(character == "=")
+    if(stack.length == 0 && (character == "x" || character == "/"))
     {
+        return;
+    }
+    if(character == "=")
+    {   if(stack.length < 3)
+        {
+            return;
+        }
         const result = operate(stack.pop(), stack.pop(), stack.pop());
         stack.push(result);
         return;
     }
-    else if(character == "C")
+    if(character == "C")
     {
         stack.length = 0;
         return;
     }
-    else if(character == "Del")
-    {
+    if(character == "Del")
+    { 
         if(stack[stack.length-1].length>1)
         {
             stack[stack.length-1] = stack[stack.length-1].slice(0,-1);
@@ -75,6 +82,10 @@ function updateStack(character)
             stack.pop();
         }
         return;
+    }
+    if(stack.length >=3)
+    {
+        updateStack("=");
     }
     stack.push(character);
 }
