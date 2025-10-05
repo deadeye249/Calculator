@@ -12,13 +12,13 @@ body{
 }
 
 .heading{
+    flex: 1 1 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: black;
     color:white;
-    height: 5vh;
-    width: 100%;
+    width: 100vw;
     font-weight: bold;
     font-size: 1.5rem;
     border: 2px;
@@ -28,12 +28,12 @@ body{
 }
 
 .bottom{
+    flex: 1 1 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: black;
-    height: 5vh;
-    width: 100%;
+    width: 100vw;
     font-weight: bold;
     font-size: 1.5rem;
     color:white;
@@ -44,18 +44,17 @@ body{
 }
 
 .calculator-frame{
-    flex: 1 1 0;
+    flex: 1 1 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px;
     border-color: lightblue;
     border-style: solid;
-    width: 30%;
+    width: clamp(20rem,90vw,40rem);
     margin: 5vh 0 5vh 0;
     box-sizing: border-box;
     background-color: lightblue;
-    max-height: 80vh;
 }
 
 .calculator-frame, .calculator-frame *{
@@ -110,7 +109,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     background-color: white;
 }
 
