@@ -53,16 +53,37 @@ function updateDisplay()
 
 function updateStack(character)
 {
-    if(stack.length == 0 && (character == "x" || character == "/"))
+    if(character == "x" || character == "/" || character == "+" || character == "-")
     {
+        if(stack.length == 0)
+        {
+            if(character == "-")
+            {
+                stack.push(character);
+                return;
+            }
+            return;
+        }
+        if(operator_list.includes(stack[stack.length-1]) && operator_list.includes(character))
+        {
+            stack.pop();
+            updateStack(character);
+            return;
+        }
+        if(stack.length >=3)
+        {
+            updateStack("=");
+        }
+        stack.push(character);
         return;
     }
+    
     if(character == "=")
     {   if(stack.length < 3)
         {
             return;
         }
-        const result = operate(stack.pop(), stack.pop(), stack.pop());
+        const result = String(operate(stack.pop(), stack.pop(), stack.pop()));
         stack.push(result);
         return;
     }
@@ -73,6 +94,10 @@ function updateStack(character)
     }
     if(character == "Del")
     { 
+        if(stack.length == 0)
+        {
+            return;
+        }
         if(stack[stack.length-1].length>1)
         {
             stack[stack.length-1] = stack[stack.length-1].slice(0,-1);
@@ -83,11 +108,36 @@ function updateStack(character)
         }
         return;
     }
-    if(stack.length >=3)
+
+    if(numbers_list.includes(character))
     {
-        updateStack("=");
+        if(stack.length == 0)
+        {
+            stack.push(character);
+            return;
+        }
+        if (stack.length == 1)
+        {
+            if(stack[stack.length-1].includes(".") && character == ".")
+            {
+                return;
+            }
+            stack[stack.length-1] += character;
+            return;
+        }
+        if(stack.length == 2 && operator_list.includes(stack[stack.length-1]))
+        {
+            stack.push(character);
+            return;
+        }
+        if(stack.length == 3)
+        {
+            stack[stack.length-1] += character;
+            return;
+        }
+        return;
+        
     }
-    stack.push(character);
 }
 
 function addButton(parent_node, character)

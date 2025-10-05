@@ -17,12 +17,12 @@ body{
     align-items: center;
     justify-content: center;
     background-color: black;
-    color:white;
+    color:lightblue;
     width: 100vw;
     font-weight: bold;
     font-size: 1.5rem;
     border: 2px;
-    border-color: white;
+    border-color: lightblue;
     box-sizing: border-box;
     border-style: solid;
 }
@@ -36,9 +36,9 @@ body{
     width: 100vw;
     font-weight: bold;
     font-size: 1.5rem;
-    color:white;
+    color:lightblue;
     border: 2px;
-    border-color: white;
+    border-color: lightblue;
     box-sizing: border-box;
     border-style: solid;
 }
