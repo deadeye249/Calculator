@@ -51,7 +51,7 @@ body{
     border: 2px;
     border-color: lightblue;
     border-style: solid;
-    width: clamp(20rem,90vw,40rem);
+    width: clamp(20rem, 90vw, 48vh);
     margin: 5vh 0 5vh 0;
     box-sizing: border-box;
     background-color: lightblue;
