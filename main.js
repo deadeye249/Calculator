@@ -5,6 +5,22 @@ const operators_section = document.querySelector(".operators-section");
 const screen_section = document.querySelector(".calculator-screen");
 const bottom_section = document.querySelector(".bottom");
 const stack = [];
+const MAX_DIGITS = 10;
+const MAX_DECIMAL = 5;
+
+function decimalLimitReached(str)
+{
+    const decimal_start = str.indexOf(".");
+    if(decimal_start == -1)
+    {
+        return false;
+    }
+    return (str.substring(decimal_start+1).length >= MAX_DECIMAL);
+}
+function digitLimitReached(str)
+{
+    return (str.length >= MAX_DIGITS);
+}
 
 function add(first, second)
 {
@@ -84,12 +100,16 @@ function updateStack(character)
             return;
         }
         const result = String(operate(stack.pop(), stack.pop(), stack.pop()));
-        stack.push(result);
+        for (const char of result)
+        {
+            updateStack(char);
+        }
         return;
     }
     if(character == "C")
     {
         stack.length = 0;
+        bottom_section.textContent = "";
         return;
     }
     if(character == "Del")
@@ -118,21 +138,44 @@ function updateStack(character)
         }
         if (stack.length == 1)
         {
-            if(stack[stack.length-1].includes(".") && character == ".")
+            if((stack[0][0] == "0") && (character != ".") && (stack[0].length == 1))
+            {
+                stack[0] = [character];
+                return;
+            }
+            if(stack[0].includes(".") && character == ".")
             {
                 return;
             }
-            stack[stack.length-1] += character;
+            if(digitLimitReached(stack[0]) || decimalLimitReached(stack[0]))
+            {
+                return;
+            }
+            stack[0] += character;
             return;
         }
-        if(stack.length == 2 && operator_list.includes(stack[stack.length-1]))
+        if(stack.length == 2 && operator_list.includes(stack[1]))
         {
             stack.push(character);
             return;
         }
         if(stack.length == 3)
         {
-            stack[stack.length-1] += character;
+            if((stack[2][0] == "0") && (character != ".") && (stack[2].length == 1))
+            {
+                stack[2] = [character];
+                return;
+            }
+
+            if(stack[2].includes(".") && character == ".")
+            {
+                return;
+            }
+            if(digitLimitReached(stack[2]) || decimalLimitReached(stack[2]))
+            {
+                return;
+            }
+            stack[2] += character;
             return;
         }
         return;
@@ -164,9 +207,9 @@ function addButton(parent_node, character)
     });
     new_node.addEventListener("click",(event)=>{
         const clicked_character = event.target.textContent;
+        bottom_section.textContent+=" "+ clicked_character;
         updateStack(clicked_character);
         updateDisplay();
-        bottom_section.textContent+=" "+ clicked_character;
     });
     parent_node.append(new_node);
 }

@@ -41,6 +41,7 @@ body{
     border-color: lightblue;
     box-sizing: border-box;
     border-style: solid;
+    overflow: scroll;
 }
 
 .calculator-frame{
@@ -66,11 +67,12 @@ body{
     height: 15vh;
     width: 100%;
     padding: 1.2rem;
-    display: flex;
-    justify-content: right;
-    align-items: center;
     font-size: 3rem;
     box-sizing: border-box;
+    word-break: break-all;
+    text-align: right;
+    align-content: center;
+    overflow: scroll;
     
 }
 
